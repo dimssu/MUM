@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+  padding-top: $navbar-height; // Prevent navbar overlap
+  padding-bottom: $spacing-lg;
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $spacing-lg $spacing-md;
+} 

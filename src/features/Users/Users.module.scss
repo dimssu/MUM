@@ -1,0 +1,101 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.usersContainer {
+  width: 100%;
+}
+
+.header {
+  @include flex(row, space-between, center);
+  margin-bottom: $spacing-lg;
+  
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+.addButton {
+  @include button($secondary-color);
+  text-decoration: none;
+}
+
+.emptyState {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: $spacing-xl;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  p {
+    margin-bottom: $spacing-lg;
+    color: #666;
+  }
+}
+
+.tableContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: $spacing-md;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  tr:hover {
+    background-color: rgba($primary-color, 0.05);
+  }
+}
+
+.actions {
+  @include flex(row, flex-start, center);
+  gap: $spacing-sm;
+}
+
+.viewButton, .editButton, .deleteButton {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.viewButton {
+  background-color: $primary-color;
+  color: white;
+}
+
+.editButton {
+  background-color: #f39c12;
+  color: white;
+}
+
+.deleteButton {
+  background-color: $error-color;
+  color: white;
+  border: none;
+}
+
+.loading {
+  text-align: center;
+  padding: $spacing-xl;
+  font-size: 1.1rem;
+  color: #666;
+} 

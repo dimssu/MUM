@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.loginContainer {
+  @include flex(column, center, center);
+  min-height: 100vh;
+  padding: $spacing-md;
+  background-color: $background-color;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: $spacing-xl;
+  
+  h1 {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    color: $primary-color;
+    font-size: 1.8rem;
+  }
+}
+
+.loginForm {
+  @include flex(column, flex-start, stretch);
+}
+
+.formGroup {
+  margin-bottom: $spacing-lg;
+  
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+    color: $text-color;
+  }
+  
+  input {
+    width: 100%;
+    padding: $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+    
+    &::placeholder {
+      color: #aaa;
+    }
+    
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.loginButton {
+  @include button($primary-color);
+  width: 100%;
+  padding: $spacing-md;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: $spacing-md;
+}
+
+.errorMessage {
+  color: $error-color;
+  margin-top: $spacing-xs;
+  font-size: 0.875rem;
+} 

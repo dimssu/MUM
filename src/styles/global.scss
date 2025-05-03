@@ -1,0 +1,96 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+// Main content area that accounts for fixed navbar and footer
+.main-content {
+  min-height: calc(100vh - #{$navbar-height} - #{$footer-height});
+  padding-top: $navbar-height; // Prevent navbar overlap
+  padding-bottom: $spacing-lg;
+}
+
+// Form styles
+.form-group {
+  margin-bottom: $spacing-md;
+  
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 1rem;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// Button styles
+.btn {
+  @include button;
+  
+  &.btn-secondary {
+    @include button($secondary-color);
+  }
+  
+  &.btn-danger {
+    @include button($error-color);
+  }
+}
+
+// Card styles
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+// Table styles
+table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: $spacing-sm;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  th {
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background-color: rgba($primary-color, 0.05);
+  }
+} 

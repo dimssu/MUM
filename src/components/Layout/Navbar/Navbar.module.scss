@@ -1,0 +1,65 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navbar-height;
+  background-color: $primary-color;
+  color: $light-text;
+  z-index: $z-index-navbar;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  @include flex(row, space-between, center);
+  height: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $light-text;
+  text-decoration: none;
+}
+
+.navLinks {
+  @include flex(row, flex-end, center);
+  gap: $spacing-md;
+}
+
+.navLink {
+  color: $light-text;
+  text-decoration: none;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba($light-text, 0.1);
+  }
+  
+  &.active {
+    background-color: rgba($light-text, 0.2);
+  }
+}
+
+.logoutButton {
+  background-color: rgba($light-text, 0.1);
+  color: $light-text;
+  border: none;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba($light-text, 0.2);
+  }
+} 
