@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { getUsers, deleteUser, updateUser, User } from '../../api/users';
@@ -7,6 +7,7 @@ import styles from './Users.module.scss';
 import Avatar from '../../components/Common/Avatar/Avatar';
 import SideDrawer from '../../components/Common/SideDrawer/SideDrawer';
 import Form, { FormField, FormValues } from '../../components/Common/Form/Form';
+import AddUserModal from './AddUserModal/AddUserModal';
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,6 +15,7 @@ const Users = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [formLoading, setFormLoading] = useState(false);
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -76,6 +78,12 @@ const Users = () => {
   const handleDrawerClose = () => {
     setIsDrawerOpen(false);
     setSelectedUser(null);
+  };
+
+  // Handle add user button click
+  const handleAddUserClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsAddUserModalOpen(true);
   };
 
   // Handle save user changes
@@ -179,17 +187,17 @@ const Users = () => {
     <div className={styles.usersContainer}>
       <div className={styles.header}>
         <h1>Users</h1>
-        <Link to="/users/new" className={styles.addButton}>
+        <a href="#" onClick={handleAddUserClick} className={styles.addButton}>
           Add New User
-        </Link>
+        </a>
       </div>
 
       {users?.length === 0 ? (
         <div className={styles.emptyState}>
           <p>No users found. Create your first user to get started.</p>
-          <Link to="/users/new" className={styles.addButton}>
+          <a href="#" onClick={handleAddUserClick} className={styles.addButton}>
             Add New User
-          </Link>
+          </a>
         </div>
       ) : (
         <div className={styles.tableContainer}>
@@ -209,7 +217,7 @@ const Users = () => {
             </thead>
             <tbody>
               {users?.length > 0 && users?.map(user => (
-                <tr key={user._id}>
+                <tr key={user._id} onClick={() => handleEdit(user._id)}>
                   <td className={styles.avatarCell}>
                     <Avatar 
                       src={user.profile_picture_url} 
@@ -280,6 +288,13 @@ const Users = () => {
         </>
         )}
       </SideDrawer>
+
+    {/* Add User Modal */}
+    <AddUserModal 
+      isOpen={isAddUserModalOpen}
+      onClose={() => setIsAddUserModalOpen(false)}
+      onUserAdded={fetchUsers}
+    />
     </>
   );
 };

@@ -29,6 +29,11 @@ export interface CreateUserData {
   role?: string;
 }
 
+export interface RegisterUserData {
+  email: string;
+  password: string;
+}
+
 export interface UpdateUserData {
   userName?: string;
   first_name?: string;
@@ -63,6 +68,15 @@ export const createUser = async (userData: CreateUserData): Promise<User> => {
   try {
     const response = await apiClient.post<ApiResponse<User>>('/users', userData);
     return response.data.data;
+  } catch (error) {
+    throw handleApiError(error);
+  }
+};
+
+export const registerUser = async (userData: RegisterUserData): Promise<any> => {
+  try {
+    const response = await apiClient.post('/auth/register', userData);
+    return response.data;
   } catch (error) {
     throw handleApiError(error);
   }

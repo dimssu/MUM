@@ -1,0 +1,105 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $z-index-modal;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalContainer {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: $text-color;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $text-color;
+    padding: $spacing-xs;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.modalContent {
+  padding: $spacing-lg;
+  padding-top: 0;
+}
+
+.inputGroup {
+  margin-bottom: $spacing-md;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+}
+
+.submitButton {
+  @include button($primary-color);
+  padding: $spacing-sm $spacing-lg;
+  font-weight: 500;
+}
+
+.cancelButton {
+  @include button(transparent, $text-color);
+  padding: $spacing-sm $spacing-lg;
+  border: 1px solid $border-color;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken(white, 5%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
