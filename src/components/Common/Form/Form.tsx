@@ -160,7 +160,6 @@ const Form: React.FC<FormProps> = ({
 
   const validateForm = (): boolean => {
     let isValid = true;
-    const newErrors: Record<string, string> = {};
     const newTouched: Record<string, boolean> = {};
 
     fields.forEach((field) => {

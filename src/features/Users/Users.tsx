@@ -45,9 +45,22 @@ const Users = () => {
     }
   };
 
-  // Handle view user
-  const handleView = (id: string) => {
-    console.log('Viewing user:', id);
+//   // Handle view user
+//   const handleView = (id: string) => {
+//     console.log('Viewing user:', id);
+//   };
+
+  const getRoleText = (role: string) => {
+    switch (role) {
+      case 'SUPER_ADMIN':
+        return 'Super Admin';
+      case 'ORG_ADMIN':
+        return 'Org Admin';
+      case 'ORG_USER':
+        return 'Org User';
+      default:
+        return '-';
+    }
   };
 
   // Handle edit user
@@ -95,31 +108,38 @@ const Users = () => {
 
   // Helper function to get full name
   const getFullName = (user: User) => {
-    return `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'N/A';
+    return `${user.first_name || ''} ${user.last_name || ''}`.trim() || '-';
   };
 
   // Form fields for user edit
   const getUserFormFields = (): FormField[] => [
     {
-      name: 'userName',
-      label: 'Username',
-      type: 'text',
-      required: true,
-      value: selectedUser?.userName || '',
-    },
-    {
       name: 'first_name',
       label: 'First Name',
       type: 'text',
-      required: true,
+      required: false,
       value: selectedUser?.first_name || '',
     },
     {
       name: 'last_name',
       label: 'Last Name',
       type: 'text',
-      required: true,
+      required: false,
       value: selectedUser?.last_name || '',
+    },
+    {
+        name: 'userName',
+        label: 'Username',
+        type: 'text',
+        required: false,
+        value: selectedUser?.userName || '',
+    },
+    {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        required: false,
+        value: selectedUser?.email || '',
     },
     {
       name: 'profile_picture_url',
@@ -130,8 +150,7 @@ const Users = () => {
     {
       name: 'phone_number',
       label: 'Phone Number',
-      type: 'text',
-    //   pattern: '^[0-9]{10}$',
+      type: 'tel',
       patternMessage: 'Phone number must be 10 digits',
       value: selectedUser?.phone_number || '',
     },
@@ -147,6 +166,7 @@ const Users = () => {
       last_name: selectedUser.last_name || '',
       profile_picture_url: selectedUser.profile_picture_url || '',
       phone_number: selectedUser.phone_number || '',
+      email: selectedUser.email || '',
     };
   };
 
@@ -183,6 +203,7 @@ const Users = () => {
                 <th>Phone</th>
                 <th>Role</th>
                 <th>Created At</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -200,12 +221,13 @@ const Users = () => {
                   <td>{user.userName || '-'}</td>
                   <td>{user.email || '-'}</td>
                   <td>{user.phone_number || '-'}</td>
-                  <td>{user.role || '-'}</td>
+                  <td><span className={styles.roleText}>{getRoleText(user.role)}</span></td>
                   <td>{dayjs(user.createdAt).format('MMM D, YYYY')}</td>
+                  <td>{user.isVerified ? 'Verified' : 'Unverified'}</td>
                   <td className={styles.actions}>
-                    <button onClick={() => handleView(user._id)} className={styles.viewButton}>
+                    {/* <button onClick={() => handleView(user._id)} className={styles.viewButton}>
                       View
-                    </button>
+                    </button> */}
                     <button onClick={() => handleEdit(user._id)} className={styles.editButton}>
                       Edit
                     </button>
@@ -230,24 +252,34 @@ const Users = () => {
       onClose={handleDrawerClose}
       title={`Edit User: ${selectedUser ? getFullName(selectedUser) : ''}`}
       width="700px"
-      onPrimaryClick={() => {handleSaveUser}} // We'll handle this in the Form component
+      onPrimaryClick={() => {}}
       onSecondaryClick={handleDrawerClose}
       drawerContainerStyle={{ backgroundColor: '#fff' }}
     >
       {selectedUser && (
-        <div className={styles.userEditForm}>
-          <Form
-            fields={getUserFormFields()}
-            initialValues={getInitialValues()}
-            onSubmit={handleSaveUser}
-            submitButtonText="Save Changes"
-            cancelButtonText="Cancel"
-            onCancel={handleDrawerClose}
-            loading={formLoading}
-          />
-        </div>
-      )}
-    </SideDrawer>
+        <>
+          <div className={styles.profilePictureContainer}>
+            <Avatar 
+              src={selectedUser.profile_picture_url} 
+              alt={getFullName(selectedUser)}
+              size={100}
+            />
+            <h3>{getFullName(selectedUser)}</h3>
+          </div>
+          <div className={styles.userEditForm}>
+            <Form
+                fields={getUserFormFields()}
+                initialValues={getInitialValues()}
+                onSubmit={handleSaveUser}
+                submitButtonText="Save Changes"
+                cancelButtonText="Cancel"
+                onCancel={handleDrawerClose}
+                loading={formLoading}
+            />
+          </div>
+        </>
+        )}
+      </SideDrawer>
     </>
   );
 };

@@ -62,12 +62,21 @@
   tr:hover {
     background-color: rgba($primary-color, 0.05);
   }
+
+  .roleText {
+    text-transform: capitalize;
+    background-color: #f9f5ff;
+    color: $primary-color;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 16px;
+    font-size: 0.875rem;
+  }
 }
 
 .actions {
-  @include flex(row, flex-start, center);
-  gap: $spacing-sm;
-  padding: 20px !important;
+    button {
+        margin-right: $spacing-sm;
+    }
 }
 
 .viewButton, .editButton, .deleteButton {
@@ -126,5 +135,18 @@
   
   :global(.formGroup) {
     margin-bottom: $spacing-md;
+  }
+}
+
+.profilePictureContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-lg 0;
+  
+  h3 {
+    margin-top: $spacing-md;
+    font-weight: 600;
+    color: $text-color;
   }
 } 

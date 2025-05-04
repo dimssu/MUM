@@ -7,6 +7,7 @@ export interface User {
   email: string;
   role: string;
   is_active: boolean;
+  isVerified: boolean;
   createdAt: string;
   updatedAt: string;
   authMethod: string;
@@ -78,7 +79,7 @@ export const updateUser = async (id: string, userData: UpdateUserData): Promise<
 
 export const deleteUser = async (id: string): Promise<void> => {
   try {
-    await apiClient.delete<ApiResponse<null>>(`/users/${id}`);
+    await apiClient.delete<ApiResponse<null>>(`/mudra/users/${id}`);
   } catch (error) {
     throw handleApiError(error);
   }

@@ -16,9 +16,7 @@ const Navbar = () => {
           User Management System
         </Link>
         <div className={styles.navLinks}>
-          <Link to="/" className={styles.navLink}>Home</Link>
           <Link to="/users" className={styles.navLink}>Users</Link>
-          <Link to="/users/new" className={styles.navLink}>Add User</Link>
           <button onClick={handleLogout} className={styles.logoutButton}>
             Logout
           </button>
