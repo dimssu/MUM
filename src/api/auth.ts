@@ -1,5 +1,5 @@
 import apiClient from './container';
-import { handleApiError, ApiResponse } from './helpers';
+import { handleApiError } from './helpers';
 
 // Types
 export interface LoginCredentials {

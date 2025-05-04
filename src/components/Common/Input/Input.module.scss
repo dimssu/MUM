@@ -1,0 +1,293 @@
+.InputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+
+    .UnitWrap {
+        color: #9d9d9d;
+        font-size: 0.75rem;
+        line-height: 14.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        padding: 0.525rem 0;
+        background-color: #f9f9f9;
+        border: 0.5px solid #f9f9f9;
+        border-left: none;
+        border-top-right-radius: 0.375rem;
+        border-bottom-right-radius: 0.375rem;
+        width: max-content;
+        min-width: 25%;
+        white-space: nowrap;
+        transition: all 0.5s ease;
+
+        .Unit {
+            border-left: 0.5px solid #c7c7c7;
+            padding: 0.48rem 0.5rem 0.48rem 0.5rem;
+            display: flex;
+            width: fit-content;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &.UnitWithData {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.5px solid #c7c7c7;
+            border-left: none;
+            background-color: #ffffff;
+
+            .Unit {
+                border-left-color: #ffffff;
+            }
+        }
+
+        &.Active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.5px solid var(--primary-border-colour);
+            border-left: none;
+            background-color: #ffffff;
+
+            .Unit {
+                border-left-color: #ffffff;
+            }
+        }
+    }
+}
+
+.ContainerWithErrorMsg {
+    margin-top: 2.1875rem;
+}
+
+.FormInput {
+    transition: all 0.5s ease;
+    padding: 1rem 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    outline: none;
+    color: #000000;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    background-color: #f9f9f9;
+    border: 0.5px solid #f9f9f9;
+
+    &:-webkit-autofill + label {
+        top: -20%;
+        left: 0;
+        font-size: 0.625rem;
+        color: #8d8d8d;
+        font-weight: 300;
+    }
+
+    &:focus {
+        background-color: #ffffff;
+        border: 0.5px solid var(--primary-border-colour) !important;
+
+        &.WithUnit {
+            border-right: none !important;
+        }
+    }
+
+    &::placeholder {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &:focus ~ label {
+        top: -20%;
+        left: 0;
+        font-size: 10px;
+        color: #8d8d8d;
+        font-weight: 400;
+    }
+
+    &:focus ~ .UnitWrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0.5px solid var(--primary-border-colour);
+        border-left: none;
+        background-color: #ffffff;
+
+        .Unit {
+            border-left-color: #ffffff;
+        }
+    }
+
+    &:invalid ~ label {
+        top: -20%;
+        left: 0;
+        font-size: 0.625rem;
+        font-weight: 300;
+    }
+
+    &:disabled {
+        background-color: #ebebeb;
+        color: #979797;
+        border: 0.5px solid #ebebeb;
+        & ~ label {
+            top: -20%;
+            left: 0;
+            font-size: 0.625rem;
+            color: #8d8d8d;
+            font-weight: 300;
+        }
+    }
+
+    &.HasData {
+        background: #ffffff;
+        border: 0.5px solid #c7c7c7;
+
+        &:disabled {
+            color: #6e6e6e;
+            background-color: #ebebeb;
+        }
+
+        &.WithUnit {
+            border-right: none;
+        }
+    }
+
+    &.Invalid {
+        border: 0.5px solid #ce121d;
+    }
+
+    &.WithUnit {
+        border-right: none !important;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.ReadOnly {
+        cursor: pointer;
+        user-select: none;
+
+        &:focus {
+            outline: none;
+
+            & ~ .UnitWrap {
+                border: 0.5px solid #c7c7c7;
+                border-left: none;
+                background-color: #ffffff;
+
+                &.Active {
+                    border: 0.5px solid var(--primary-border-colour);
+                    border-left: none;
+                }
+            }
+        }
+
+        &.Active {
+            background-color: #ffffff;
+            border: 0.5px solid var(--primary-border-colour) !important;
+
+            &.WithUnit {
+                border-right: none !important;
+            }
+        }
+    }
+
+    &.Active {
+        background-color: #ffffff;
+        border: 0.5px solid var(--primary-border-colour) !important;
+
+        &.WithUnit {
+            border-right: none !important;
+        }
+    }
+
+    &:focus,
+    &.Active {
+        background-color: #ffffff;
+        border: 0.5px solid var(--primary-border-colour) !important;
+
+        &.WithUnit {
+            border-right: none !important;
+        }
+    }
+}
+
+textarea.FormInput {
+    &:-webkit-autofill + label {
+        top: -8%;
+    }
+
+    &:focus ~ label {
+        top: 0;
+    }
+
+    &:disabled {
+        & ~ label {
+            top: 0;
+        }
+    }
+}
+.HasData {
+    background: #ffffff;
+    border: 0.5px solid #c7c7c7;
+}
+
+.HasData ~ label {
+    color: #8d8d8d;
+}
+
+.FormLabel {
+    position: absolute;
+    pointer-events: none;
+    left: 0.625rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #8d8d8d;
+    transition: 0.5s;
+    margin-bottom: 0;
+}
+
+textarea ~ .FormLabel {
+    top: 2rem;
+    transform: translateY(-1rem);
+}
+
+.FormLabelInputHasValue {
+    top: -20%;
+    left: 0;
+    font-size: 0.625rem;
+    font-weight: 300;
+    color: black;
+}
+
+textarea ~ .FormLabelInputHasValue {
+    top: 0;
+}
+
+.Error {
+    position: absolute;
+    left: 0;
+    color: #ce121d;
+    top: calc(100% + 0.125rem);
+    font-size: 0.625rem;
+}
+.ConvertedText {
+    position: absolute;
+    left: 0;
+    color: #9d9d9d;
+    top: calc(100% + 0.125rem);
+    font-size: 0.625rem;
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.Invalid {
+    border-top: 0.5px solid #ce121d !important;
+    border-right: 0.5px solid #ce121d !important;
+    border-bottom: 0.5px solid #ce121d !important;
+}

@@ -3,12 +3,22 @@ import { handleApiError, ApiResponse } from './helpers';
 
 // Types
 export interface User {
-  id: number;
-  name: string;
+  _id: string;
   email: string;
   role: string;
+  is_active: boolean;
   createdAt: string;
   updatedAt: string;
+  authMethod: string;
+  userName: string;
+  first_name: string;
+  last_name: string;
+  profile_picture_url: string;
+  phone_number: string;
+}
+
+export interface UsersResponse {
+  users: User[];
 }
 
 export interface CreateUserData {
@@ -19,7 +29,11 @@ export interface CreateUserData {
 }
 
 export interface UpdateUserData {
-  name?: string;
+  userName?: string;
+  first_name?: string;
+  last_name?: string;
+  profile_picture_url?: string;
+  phone_number?: string;
   email?: string;
   password?: string;
   role?: string;
@@ -28,8 +42,8 @@ export interface UpdateUserData {
 // API functions
 export const getUsers = async (): Promise<User[]> => {
   try {
-    const response = await apiClient.get<ApiResponse<User[]>>('/users');
-    return response.data.data;
+    const response = await apiClient.get<UsersResponse>('/mudra/users');
+    return response.data.users;
   } catch (error) {
     throw handleApiError(error);
   }
@@ -53,16 +67,16 @@ export const createUser = async (userData: CreateUserData): Promise<User> => {
   }
 };
 
-export const updateUser = async (id: number, userData: UpdateUserData): Promise<User> => {
+export const updateUser = async (id: string, userData: UpdateUserData): Promise<User> => {
   try {
-    const response = await apiClient.put<ApiResponse<User>>(`/users/${id}`, userData);
+    const response = await apiClient.put<ApiResponse<User>>(`/mudra/users/${id}`, userData);
     return response.data.data;
   } catch (error) {
     throw handleApiError(error);
   }
 };
 
-export const deleteUser = async (id: number): Promise<void> => {
+export const deleteUser = async (id: string): Promise<void> => {
   try {
     await apiClient.delete<ApiResponse<null>>(`/users/${id}`);
   } catch (error) {

@@ -1,0 +1,116 @@
+@import '../../../styles/variables';
+
+.drawerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  z-index: $z-index-modal;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: $background-color;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: $text-color;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $text-color;
+    padding: $spacing-xs;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.drawerContent {
+  flex: 1;
+  padding: $spacing-lg;
+  overflow-y: auto;
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-top: 1px solid $border-color;
+}
+
+.primaryButton {
+  padding: $spacing-sm $spacing-lg;
+  background-color: $primary-color;
+  color: $light-text;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.secondaryButton {
+  padding: $spacing-sm $spacing-lg;
+  background-color: transparent;
+  color: $text-color;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken($background-color, 5%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
