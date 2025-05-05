@@ -16,8 +16,14 @@
 }
 
 .addButton {
-  @include button($secondary-color);
+  color: #49A71B;
   text-decoration: none;
+  background-color: #E1FFE1;
+  padding: $spacing-sm $spacing-md;
+  border-radius: 4px;
+  border: 1px solid #49A71B;
+  font-size: 0.875rem;
+  cursor: pointer;
 }
 
 .emptyState {
