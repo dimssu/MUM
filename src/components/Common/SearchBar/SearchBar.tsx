@@ -11,7 +11,7 @@ interface SearchBoxProps {
 
 const SearchBox: React.FC<SearchBoxProps> = ({
     onSearch,
-    placeholder = 'Search by Company/Lender Name (Min 3 char)',
+    placeholder = 'Search by Name or Username (Min 3 char)',
 }) => {
     const [queryText, setQueryText] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
