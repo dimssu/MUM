@@ -9,6 +9,12 @@
   @include flex(row, space-between, center);
   margin-bottom: $spacing-lg;
   
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
   h1 {
     font-size: 1.8rem;
     font-weight: 600;

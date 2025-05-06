@@ -7,6 +7,7 @@ import Avatar from '../../components/Common/Avatar/Avatar';
 import SideDrawer from '../../components/Common/SideDrawer/SideDrawer';
 import Form, { FormField, FormValues } from '../../components/Common/Form/Form';
 import AddUserModal from './AddUserModal/AddUserModal';
+import SearchBox from '../../components/Common/SearchBar/SearchBar';
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,22 +16,23 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [formLoading, setFormLoading] = useState(false);
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const data = await getUsers();
+      const data = await getUsers(searchQuery.length >= 3 ? searchQuery : '');
       setUsers(data);
     } catch (error) {
-      console.error('Failed to fetch users:', error);
+      console.error("Failed to fetch users:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [searchQuery]);
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this user?')) {
@@ -177,18 +179,17 @@ const Users = () => {
     };
   };
 
-  if (loading) {
-    return <div className={styles.loading}>Loading users...</div>;
-  }
-
   return (
     <>
     <div className={styles.usersContainer}>
       <div className={styles.header}>
         <h1>Users</h1>
+        <div className={styles.searchContainer}>
+          <SearchBox onSearch={setSearchQuery} />
         <a href="#" onClick={handleAddUserClick} className={styles.addButton}>
           Add New User
         </a>
+        </div>
       </div>
 
       {users?.length === 0 ? (
@@ -200,7 +201,7 @@ const Users = () => {
         </div>
       ) : (
         <div className={styles.tableContainer}>
-          <table className={styles.usersTable}>
+          {loading ? <div className={styles.loading}>Loading users...</div> : <table className={styles.usersTable}>
             <thead>
               <tr>
                 <th>Avatar</th>
@@ -248,7 +249,7 @@ const Users = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>}
         </div>
       )}
     </div>

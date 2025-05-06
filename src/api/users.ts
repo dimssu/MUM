@@ -46,9 +46,9 @@ export interface UpdateUserData {
 }
 
 // API functions
-export const getUsers = async (): Promise<User[]> => {
+export const getUsers = async (query: string): Promise<User[]> => {
   try {
-    const response = await apiClient.get<UsersResponse>('/mudra/users');
+    const response = await apiClient.get<UsersResponse>('/mudra/users', { params: { search: query } });
     return response.data.users;
   } catch (error) {
     throw handleApiError(error);
