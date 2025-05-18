@@ -1,5 +1,5 @@
-@import 'variables';
-@import 'mixins';
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 * {
   margin: 0;
@@ -8,8 +8,8 @@
 }
 
 body {
-  background-color: $background-color;
-  color: $text-color;
+  background-color: vars.$background-color;
+  color: vars.$text-color;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -17,52 +17,52 @@ body {
 }
 
 .container {
-  max-width: $container-max-width;
+  max-width: vars.$container-max-width;
   margin: 0 auto;
-  padding: 0 $spacing-md;
+  padding: 0 vars.$spacing-md;
 }
 
 // Main content area that accounts for fixed navbar and footer
 .main-content {
-  min-height: calc(100vh - #{$navbar-height} - #{$footer-height});
-  padding-top: $navbar-height; // Prevent navbar overlap
-  padding-bottom: $spacing-lg;
+  min-height: calc(100vh - #{vars.$navbar-height} - #{vars.$footer-height});
+  padding-top: vars.$navbar-height; // Prevent navbar overlap
+  padding-bottom: vars.$spacing-lg;
 }
 
 // Form styles
 .form-group {
-  margin-bottom: $spacing-md;
+  margin-bottom: vars.$spacing-md;
   
   label {
     display: block;
-    margin-bottom: $spacing-xs;
+    margin-bottom: vars.$spacing-xs;
     font-weight: 500;
   }
   
   input, select, textarea {
     width: 100%;
-    padding: $spacing-sm;
-    border: 1px solid $border-color;
+    padding: vars.$spacing-sm;
+    border: 1px solid vars.$border-color;
     border-radius: 4px;
     font-size: 1rem;
     
     &:focus {
       outline: none;
-      border-color: $primary-color;
+      border-color: vars.$primary-color;
     }
   }
 }
 
 // Button styles
 .btn {
-  @include button;
+  @include mix.button;
   
   &.btn-secondary {
-    @include button($secondary-color);
+    @include mix.button(vars.$secondary-color);
   }
   
   &.btn-danger {
-    @include button($error-color);
+    @include mix.button(vars.$error-color);
   }
 }
 
@@ -71,8 +71,8 @@ body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: $spacing-lg;
-  margin-bottom: $spacing-lg;
+  padding: vars.$spacing-lg;
+  margin-bottom: vars.$spacing-lg;
 }
 
 // Table styles
@@ -81,9 +81,9 @@ table {
   border-collapse: collapse;
   
   th, td {
-    padding: $spacing-sm;
+    padding: vars.$spacing-sm;
     text-align: left;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid vars.$border-color;
   }
   
   th {
@@ -91,6 +91,6 @@ table {
   }
   
   tr:hover {
-    background-color: rgba($primary-color, 0.05);
+    background-color: rgba(vars.$primary-color, 0.05);
   }
 } 

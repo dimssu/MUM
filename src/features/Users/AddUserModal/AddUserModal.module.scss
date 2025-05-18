@@ -1,5 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@use 'sass:color';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .modalOverlay {
   position: fixed;
@@ -80,7 +81,7 @@
   font-weight: 500;
   
   &:hover {
-    background-color: darken(white, 5%);
+    color: color.adjust($text-color, $lightness: -10%);
   }
 }
 

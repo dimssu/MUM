@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'variables' as vars;
+
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
   display: flex;
   flex-direction: $direction;
@@ -8,27 +11,27 @@
 
 @mixin responsive($breakpoint) {
   @if $breakpoint == sm {
-    @media (min-width: $breakpoint-sm) { @content; }
+    @media (min-width: vars.$breakpoint-sm) { @content; }
   } @else if $breakpoint == md {
-    @media (min-width: $breakpoint-md) { @content; }
+    @media (min-width: vars.$breakpoint-md) { @content; }
   } @else if $breakpoint == lg {
-    @media (min-width: $breakpoint-lg) { @content; }
+    @media (min-width: vars.$breakpoint-lg) { @content; }
   } @else if $breakpoint == xl {
-    @media (min-width: $breakpoint-xl) { @content; }
+    @media (min-width: vars.$breakpoint-xl) { @content; }
   }
 }
 
-@mixin button($bg-color: $primary-color, $text-color: $light-text) {
+@mixin button($bg-color: vars.$primary-color, $text-color: vars.$light-text) {
   background-color: $bg-color;
   color: $text-color;
   border: none;
   border-radius: 4px;
-  padding: $spacing-sm $spacing-md;
+  padding: vars.$spacing-sm vars.$spacing-md;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
   &:hover {
-    background-color: darken($bg-color, 10%);
+    background-color: color.adjust($bg-color, $lightness: -10%);
   }
   
   &:disabled {
