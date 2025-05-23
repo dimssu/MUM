@@ -39,6 +39,29 @@ const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginCard}>
+        {/* Secret autofill button in the top-right corner */}
+        <button
+          type="button"
+          style={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            zIndex: 2,
+            fontSize: 0,
+            width: 24,
+            height: 24,
+          }}
+          aria-label="Secret Autofill"
+          onClick={() => {
+            setEmail(import.meta.env.VITE_EMAIL);
+            setPassword(import.meta.env.VITE_PASS);
+          }}
+        >
+          <span style={{fontSize: 20, color: '#bbb'}}>&#9679;</span>
+        </button>
         <h1>Login</h1>
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <div className={styles.formGroup}>
