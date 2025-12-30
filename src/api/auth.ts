@@ -23,7 +23,7 @@ export interface User {
 // API functions
 export const login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
   try {
-    const response = await apiClient.post<AuthResponse>('/auth/login', credentials);
+    const response = await apiClient.post<AuthResponse>('/mudra/auth/login', credentials);
     
     // Store tokens in localStorage - direct access to response data
     localStorage.setItem('accessToken', response.data.accessToken);
